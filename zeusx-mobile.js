@@ -11,7 +11,7 @@ let injectCode = (event) => {
 
   if (status === 'unknown' && uosMobileRetries > 0) {
     // Check if we are on the internal login page
-    if (document.getElementById('logon-background') || document.getElementById('logon-form')) {
+    if (document.getElementById('uiLogOn_CD') || document.getElementById('logon-background') || document.getElementById('logon-form')) {
       window.location.href = 'https://zeusx.uni-osnabrueck.de';
     }
 
