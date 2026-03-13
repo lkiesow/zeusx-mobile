@@ -1,5 +1,5 @@
 console.info('UOSZEUSX ⋄ mobile');
-uosMobileRetries = 10;
+uosMobileRetries = 20;
 
 let injectCode = (event) => {
   let status = 'unknown';
@@ -51,6 +51,7 @@ let injectCode = (event) => {
           diyplay: flex;
           flex-direction: column;
           justify-content: space-between;
+          font-size: 16px;
         }
         #uos-mobile-wrapper > div {
           margin: 0;
@@ -77,13 +78,21 @@ let injectCode = (event) => {
         #uos-mobile-actions {
           height: 50vh;
         }
-        #uos-mobile-actions input {
+        #uos-mobile-actions button {
           width: 160px;
           height: 160px;
           border-radius: 80px;
-          border: none;
           color: white;
-          background: black;
+          border: 10px solid silver;
+        }
+        #uos-mobile-actions button.absent {
+          background: gray;
+        }
+        #uos-mobile-actions button.present {
+          background: green;
+        }
+        #uos-mobile-actions button.unknown {
+          display: none;
         }
         #uos-mobile-close-button {
           position: absolute;
@@ -127,12 +136,13 @@ let injectCode = (event) => {
     meta.setAttribute('content', 'width=device-width, initial-scale=1');
     head.appendChild(meta);
 
+    let punch = status === 'absent' ? 'in' : 'out';
     let mobile = document.createElement('div');
     mobile.id = 'uos-mobile-wrapper';
     mobile.innerHTML = `
         <div id='uos-mobile-status' class="${status}">${status}</div>
         <div id='uos-mobile-actions'>
-          <input type=button onClick="uosPunch()" value="punch" />
+          <button class="${status}" onClick="uosPunch()">punch<br />${punch}</button>
         </div>
         <div id='uos-mobile-work-time'>
           Netto work time today: ${workTime} h
