@@ -85,6 +85,17 @@ let injectCode = (event) => {
           color: white;
           background: black;
         }
+        #uos-mobile-close-button {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 50px;
+          height: 50px;
+          background: transparent;
+          border: 0;
+          font-size: 42px;
+          color: white;
+        }
       }
       @media (min-width: 800px) {
         #uos-mobile-wrapper {
@@ -103,9 +114,12 @@ let injectCode = (event) => {
         document.getElementById('uos-mobile-actions').innerText = 'Reloading in 3 seconds…';
         window.setTimeout(uosReload, 3000);
       }
+      function uosClose() {
+        document.getElementById('uos-mobile-wrapper').style.display = 'none';
+        document.getElementById('wrapper').style.display = 'block';
+      }
       function uosReload() {
         window.location.href = 'https://zeusx.uni-osnabrueck.de';
-        //window.location.reload();
       }`;
 
     let meta = document.createElement('meta');
@@ -123,6 +137,7 @@ let injectCode = (event) => {
         <div id='uos-mobile-work-time'>
           Netto work time today: ${workTime} h
         </div>
+        <button onClick="uosClose()" id='uos-mobile-close-button'>×</button>
       `;
     let body = document.getElementsByTagName('body')[0];
     body.appendChild(mobile);
