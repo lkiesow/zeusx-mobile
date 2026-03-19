@@ -25,7 +25,12 @@ let injectCode = (event) => {
   console.info('Status', status);
 
   // Get today's netto work time
-  let workTime = document.querySelector('div.account-info-result div.account-list-element-value')?.innerText;
+  let accountInfo = document.querySelectorAll('div.account-info-result div.account-list-element-value');
+  let workTime = accountInfo[0]?.innerText?.replaceAll(/[^0-9.,]/g, '_');
+  let sumTime = accountInfo[1]?.innerText?.replaceAll(/[^0-9.,]/g, '_');
+  let sumTimeYesterday = accountInfo[2]?.innerText?.replaceAll(/[^0-9.,]/g, '_');
+  let vacation = accountInfo[3]?.innerText?.replaceAll(/[^0-9.,]/g, '_');
+  let vacationUnplanned = accountInfo[4]?.innerText?.replaceAll(/[^0-9.,]/g, '_');
   console.info('workTime', workTime);
 
   // Get time toLocaleLowerCase();
@@ -94,6 +99,9 @@ let injectCode = (event) => {
         #uos-mobile-actions button.unknown {
           display: none;
         }
+        #uos-mobile-account-info {
+          padding-top: 15px;
+        }
         #uos-mobile-close-button {
           position: absolute;
           top: 0;
@@ -127,6 +135,15 @@ let injectCode = (event) => {
         document.getElementById('uos-mobile-wrapper').style.display = 'none';
         document.getElementById('wrapper').style.display = 'block';
       }
+      function uosAccountOverview() {
+        alert(
+            'Netto work time today:\\t${workTime}\\n'
+          + 'Overall time balance:\\t\\t${sumTime}\\n'
+          + 'Time balance yesterday:\\t${sumTimeYesterday}\\n'
+          + 'Vacation:\\t\\t\\t\\t${vacation}\\n'
+          + 'Unplanned vacation:\\t\\t${vacationUnplanned}'
+        );
+      }
       function uosReload() {
         window.location.href = 'https://zeusx.uni-osnabrueck.de';
       }`;
@@ -147,6 +164,7 @@ let injectCode = (event) => {
         <div id='uos-mobile-work-time'>
           Netto work time today: ${workTime} h
         </div>
+        <div id='uos-mobile-account-info' onClick="uosAccountOverview()">🛈</div>
         <button onClick="uosClose()" id='uos-mobile-close-button'>×</button>
       `;
     let body = document.getElementsByTagName('body')[0];
