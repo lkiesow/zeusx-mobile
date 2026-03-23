@@ -102,6 +102,13 @@ let injectCode = (event) => {
         #uos-mobile-account-info {
           padding-top: 15px;
         }
+        #uos-mobile-account-info > span {
+          border: 1px solid black;
+          width: 18px;
+          height: 18px;
+          border-radius: 9px;
+          text-align: center;
+        }
         #uos-mobile-close-button {
           position: absolute;
           top: 0;
@@ -137,11 +144,11 @@ let injectCode = (event) => {
       }
       function uosAccountOverview() {
         alert(
-            'Netto work time today:\\t${workTime}\\n'
-          + 'Overall time balance:\\t\\t${sumTime}\\n'
-          + 'Time balance yesterday:\\t${sumTimeYesterday}\\n'
-          + 'Vacation:\\t\\t\\t\\t${vacation}\\n'
-          + 'Unplanned vacation:\\t\\t${vacationUnplanned}'
+            '${workTime}\\tNetto work time today\\n'
+          + '${sumTime}\\tOverall time balance\\n'
+          + '${sumTimeYesterday}\\tTime balance yesterday\\n'
+          + '${vacation}\\tVacation\\n'
+          + '${vacationUnplanned}\\tUnplanned vacation'
         );
       }
       function uosReload() {
@@ -164,7 +171,9 @@ let injectCode = (event) => {
         <div id='uos-mobile-work-time'>
           Netto work time today: ${workTime} h
         </div>
-        <div id='uos-mobile-account-info' onClick="uosAccountOverview()">🛈</div>
+        <div id='uos-mobile-account-info' onClick="uosAccountOverview()">
+          <span>i</span>
+        </div>
         <button onClick="uosClose()" id='uos-mobile-close-button'>×</button>
       `;
     let body = document.getElementsByTagName('body')[0];
