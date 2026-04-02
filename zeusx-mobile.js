@@ -153,7 +153,13 @@ let injectCode = (event) => {
       }
       function uosReload() {
         window.location.href = 'https://zeusx.uni-osnabrueck.de';
-      }`;
+      }
+      // Keepalive every 60 seconds
+      window.setInterval(() => {
+        console.debug('keepalive');
+        _Workspace.MasterCallback('KeepAlive');
+      }, 60000);
+      `;
 
     let meta = document.createElement('meta');
     meta.setAttribute('name', 'viewport');
